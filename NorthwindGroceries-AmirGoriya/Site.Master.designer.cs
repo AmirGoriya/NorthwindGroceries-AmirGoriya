@@ -7,22 +7,56 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NorthwindGroceries_AmirGoriya
-{
-
-
-    public partial class SiteMaster
-    {
-
+namespace NorthwindGroceries_AmirGoriya {
+    
+    
+    public partial class SiteMaster {
+        
         /// <summary>
-        /// HeadContent control.
+        /// navbarBrand control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent;
-
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navbarBrand;
+        
+        /// <summary>
+        /// lvNavCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView lvNavCategories;
+        
+        /// <summary>
+        /// dsNavCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource dsNavCategories;
+        
+        /// <summary>
+        /// lvSelectedCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView lvSelectedCategory;
+        
+        /// <summary>
+        /// dsSelectedCategoryTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource dsSelectedCategoryTitle;
+        
         /// <summary>
         /// MainContent control.
         /// </summary>

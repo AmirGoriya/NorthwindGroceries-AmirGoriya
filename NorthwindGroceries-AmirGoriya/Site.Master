@@ -6,13 +6,13 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %></title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
@@ -38,31 +38,58 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top p-0" style="border-bottom-right-radius: 25px; border-bottom-left-radius: 25px">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" runat="server" href="~/">Application name</a>
-                </div>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" id="navbarBrand" runat="server" href="~/">Northwind Groceries</a>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About">About</a></li>
-                        <li><a runat="server" href="~/Contact">Contact</a></li>
+                    <ul class="navbar-nav">
+                        <asp:ListView ID="lvNavCategories" runat="server" DataSourceID="dsNavCategories">
+                            <ItemTemplate>
+                                <li class="nav-item" runat="server" style="">
+                                    <asp:HyperLink ID="lnkProductCategory" CssClass="nav-link" NavigateUrl='<%# Eval("CategoryID", "~/Default?CategoryID={0}") %>' runat="server"><%# Eval("CategoryName")%></asp:HyperLink>
+                                </li>
+                            </ItemTemplate>
+                            <%--<ItemSeparatorTemplate><li class="nav-item mt-2 text-secondary"> | </li></ItemSeparatorTemplate>--%>
+                        </asp:ListView>
                     </ul>
                 </div>
+
+                <asp:SqlDataSource ID="dsNavCategories" runat="server" ConnectionString="<%$ ConnectionStrings:NorthwindConnectionString %>" SelectCommand="SELECT [CategoryID], [CategoryName] FROM [Categories]"></asp:SqlDataSource>
             </div>
-        </div>
+
+        </nav>
         <div class="container body-content">
+
+
+            <div class="jumbotron pt-1 pb-1 mt-1">
+                <h1>Northwind Groceries</h1>
+                <p class="lead">This is a prototype for the Northwind Groceries Products.</p>
+                <p>Choose a category in the navigation bar to view products of that category.<br />
+                    You can then view the product's details by clicking on its name.</p>
+            </div>
+
+            <div>
+                <asp:ListView ID="lvSelectedCategory" runat="server" DataSourceID="dsSelectedCategoryTitle" DataKeyNames="CategoryID">
+                    <ItemTemplate>
+                        <h2><%# Eval("CategoryName") %></h2><hr />
+                    </ItemTemplate>
+                </asp:ListView>
+                <asp:SqlDataSource ID="dsSelectedCategoryTitle" runat="server" ConnectionString="<%$ ConnectionStrings:NorthwindConnectionString %>" SelectCommand="SELECT [CategoryID], [CategoryName] FROM [Categories] WHERE ([CategoryID] = @CategoryID)">
+                    <SelectParameters>
+                        <asp:QueryStringParameter Name="CategoryID" QueryStringField="CategoryID" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+            </div>
+
+
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p>&copy; <%: DateTime.Now.Year %> - Amir Goriya</p>
             </footer>
         </div>
 
