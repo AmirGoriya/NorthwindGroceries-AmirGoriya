@@ -10,7 +10,7 @@
 namespace NorthwindGroceries_AmirGoriya {
     
     
-    public partial class _Default {
+    public partial class Details {
         
         /// <summary>
         /// btnToggleDiscontinued control.
@@ -31,13 +31,13 @@ namespace NorthwindGroceries_AmirGoriya {
         protected global::System.Web.UI.WebControls.ListView lvProductList;
         
         /// <summary>
-        /// lvProductDetails control.
+        /// fvProductDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lvProductDetails;
+        protected global::System.Web.UI.WebControls.FormView fvProductDetails;
         
         /// <summary>
         /// dsProductDetails control.

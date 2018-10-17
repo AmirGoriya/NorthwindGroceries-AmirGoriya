@@ -1,6 +1,7 @@
-﻿<%@ Page Title="Northwind Groceries" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="NorthwindGroceries_AmirGoriya._Default" %>
-
-<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Details.aspx.cs" Inherits="NorthwindGroceries_AmirGoriya.Details" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeaderContent" runat="server">
+</asp:Content>
+<asp:Content ID="DetailsContent" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Button ID="btnToggleDiscontinued" runat="server" Text="Hide Discontinued" CssClass="btn btn-secondary mb-2 d-none" OnClick="btnToggleDiscontinued_Click" />
     <div class="row">
         <asp:ListView ID="lvProductList" runat="server" DataSourceID="dsProductList">
@@ -9,7 +10,7 @@
                     <p>
                         Product Name:
                         <strong>
-                            <asp:HyperLink ID="lnkProductItem" CssClass="text-success" NavigateUrl='<%# Eval("ProductID", "~/Default?ProductID={0}") %>' runat="server"><%# Eval("ProductName")%></asp:HyperLink></strong>
+                            <asp:HyperLink ID="lnkProductItem" CssClass="text-success" NavigateUrl='<%# Eval("ProductID", "~/Details?ProductID={0}") %>' runat="server"><%# Eval("ProductName")%></asp:HyperLink></strong>
                         <br />
                         Quantity per Product:
                         <strong>
@@ -24,54 +25,53 @@
             </ItemTemplate>
         </asp:ListView>
     </div>
-    <asp:ListView ID="lvProductDetails" runat="server" DataKeyNames="ProductID" DataSourceID="dsProductDetails">
-        <ItemTemplate>
 
-            <div class="row bg-light border rounded m-1 p-3">
-                <div class="col-md-4">
-                    <p>
-                        Product Name:
+    <asp:FormView ID="fvProductDetails" runat="server" DataSourceID="dsProductDetails">
+        <ItemTemplate>
+            <div class="bg-light border rounded m-1 p-3">
+                <p>
+                    Product Name:
                 <strong>
                     <asp:Label ID="ProductNameLabel" runat="server" Text='<%# Eval("ProductName") %>' CssClass="text-info" /></strong>
-                        <br />
-                        Product ID: <strong>
-                            <asp:Label ID="ProductIDLabel" runat="server" Text='<%# Eval("ProductID") %>' /></strong>
-                        <br />
-                        Supplier ID:
+                    <br />
+                    Product ID: <strong>
+                        <asp:Label ID="ProductIDLabel" runat="server" Text='<%# Eval("ProductID") %>' /></strong>
+                    <br />
+                    Supplier ID:
                 <strong>
                     <asp:Label ID="SupplierIDLabel" runat="server" Text='<%# Eval("SupplierID") %>' /></strong>
-                        <br />
-                        Category ID:
+                    <br />
+                    Category ID:
                 <strong>
                     <asp:Label ID="CategoryIDLabel" runat="server" Text='<%# Eval("CategoryID") %>' /></strong>
-                        <br />
-                        Quantity per Unit:
+                    <br />
+                    Quantity per Unit:
                 <strong>
                     <asp:Label ID="QuantityPerUnitLabel" runat="server" Text='<%# Eval("QuantityPerUnit") %>' /></strong>
-                        <br />
-                        Unit Price:
+                    <br />
+                    Unit Price:
                 <strong>
                     <asp:Label ID="UnitPriceLabel" runat="server" Text='<%# Eval("UnitPrice") %>' /></strong>
-                        <br />
-                        Units in Stock:
+                    <br />
+                    Units in Stock:
                 <strong>
                     <asp:Label ID="UnitsInStockLabel" runat="server" Text='<%# Eval("UnitsInStock") %>' /></strong>
-                        <br />
-                        Units on Order:
+                    <br />
+                    Units on Order:
                 <strong>
                     <asp:Label ID="UnitsOnOrderLabel" runat="server" Text='<%# Eval("UnitsOnOrder") %>' /></strong>
-                        <br />
-                        Re-order Level:
+                    <br />
+                    Re-order Level:
                 <strong>
                     <asp:Label ID="ReorderLevelLabel" runat="server" Text='<%# Eval("ReorderLevel") %>' /></strong>
-                        <br />
-                        <asp:CheckBox ID="DiscontinuedCheckBox" runat="server" Checked='<%# Eval("Discontinued") %>' Enabled="false" Text="Discontinued" />
-                        <br />
-                    </p>
-                </div>
+                    <br />
+                    <asp:CheckBox ID="DiscontinuedCheckBox" runat="server" Checked='<%# Eval("Discontinued") %>' Enabled="false" Text="Discontinued" />
+                    <br />
+                </p>
             </div>
         </ItemTemplate>
-    </asp:ListView>
+    </asp:FormView>
+
     <asp:SqlDataSource ID="dsProductDetails" runat="server" ConnectionString="<%$ ConnectionStrings:NorthwindConnectionString %>" SelectCommand="SELECT * FROM [Products] WHERE ([ProductID] = @ProductID)">
         <SelectParameters>
             <asp:QueryStringParameter Name="ProductID" QueryStringField="ProductID" Type="Int32" />
